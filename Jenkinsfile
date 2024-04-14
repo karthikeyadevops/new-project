@@ -14,7 +14,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("your_image_name:${DOCKER_IMAGE_TAG}", "-f ${DOCKERFILE_PATH} .")
+                    def dockerImage = docker.build("nginx:${DOCKER_IMAGE_TAG}", "-f ${DOCKERFILE_PATH} .")
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
         stage('Push to ECR') {
             steps {
                 script {
-                    docker.withRegistry(ECR_REPO_URL, 'ecr:your_ecr_credentials_id') {
+                    docker.withRegistry(ECR_REPO_URL, 'ecr:e9k0p2n3') {
                         dockerImage.push("${DOCKER_IMAGE_TAG}")
                     }
                 }
